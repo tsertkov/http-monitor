@@ -1,0 +1,18 @@
+name: Run
+
+on:
+  workflow_dispatch:
+
+env:
+  URL: https://google.com
+  TIME: 10
+  SLEEP_INTERVAL: 3
+
+jobs:
+  run-http-monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log in to registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+      - name: Run docker container
+        run: docker run --rm -it ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:latest $URL $TIME $SLEEP_INTERVAL
