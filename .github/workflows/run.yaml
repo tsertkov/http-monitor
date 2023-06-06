@@ -15,4 +15,4 @@ jobs:
       - name: Log in to registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
       - name: Run docker container
-        run: docker run --rm -it ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:latest $URL $TIME $SLEEP_INTERVAL
+        run: docker run --rm -t ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:latest $URL $TIME $SLEEP_INTERVAL
