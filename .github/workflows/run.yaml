@@ -19,6 +19,9 @@ on:
         default: "2"
         type: string
 
+env:
+  IMAGE_NAME: http-monitor
+
 jobs:
   run-http-monitor:
     runs-on: ubuntu-latest
