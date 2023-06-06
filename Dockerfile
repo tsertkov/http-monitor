@@ -4,13 +4,13 @@ ARG BASE_IMAGE="registry.gitlab.com/gitlab-org/build/cng/gitlab-ruby:master"
 FROM ruby as build
 WORKDIR /app
 # dependencies layers
-COPY Makefile .
-COPY Gemfile* .
+COPY Makefile ./
+COPY Gemfile* ./
 RUN make init
 # source code layers
 COPY lib ./lib
 COPY spec ./spec
-COPY .rubocop.yml .
+COPY .rubocop.yml ./
 RUN make test
 
 # common stage
@@ -19,7 +19,7 @@ USER nobody
 ENTRYPOINT [ "/entrypoint.sh" ]
 WORKDIR /app
 COPY entrypoint.sh /
-COPY --from=build /app/lib .
+COPY --from=build /app/lib ./
 
 # final prd stage
 FROM common as prd
