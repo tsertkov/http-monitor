@@ -1,0 +1,24 @@
+version: "3.4"
+
+x-http-monitor-common: &http-monitor-common
+  stdin_open: true
+  tty: true
+
+name: dc
+
+services:
+  http-monitor:
+    <<: *http-monitor-common
+    build:
+      target: prd
+    profiles:
+      - prd
+    command: "https://google.com 10 5"
+  http-monitor-dev:
+    <<: *http-monitor-common
+    build:
+      target: dev
+    volumes:
+      - "./lib:/app/lib"
+    profiles:
+      - dev
