@@ -5,6 +5,9 @@ on:
     branches-ignore:
       - main
 
+env:
+  IMAGE_NAME: http-monitor
+
 jobs:
   build:
     runs-on: ubuntu-latest
