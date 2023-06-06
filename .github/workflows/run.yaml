@@ -2,11 +2,22 @@ name: Run
 
 on:
   workflow_dispatch:
-
-env:
-  URL: https://google.com
-  TIME: 10
-  SLEEP_INTERVAL: 3
+    inputs:
+      url:
+        description: "Url to test"
+        required: true
+        default: "https://google.com"
+        type: string
+      time:
+        description: "Test duration"
+        required: true
+        default: "10"
+        type: string
+      sleep_interval:
+        description: "Sleep interval between probes"
+        required: true
+        default: "2"
+        type: string
 
 jobs:
   run-http-monitor:
@@ -15,4 +26,4 @@ jobs:
       - name: Log in to registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
       - name: Run docker container
-        run: docker run --rm -t ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:latest $URL $TIME $SLEEP_INTERVAL
+        run: docker run --rm -t ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:latest "${{ inputs.url }}" "${{ inputs.time }}" "${{ inputs.sleep_interval }}"
