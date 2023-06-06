@@ -20,5 +20,6 @@ services:
       target: dev
     volumes:
       - "./lib:/app/lib"
+      - "./http_monitor.rb:/app/http_monitor.rb"
     profiles:
       - dev
